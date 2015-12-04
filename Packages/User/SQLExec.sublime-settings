@@ -1,0 +1,43 @@
+{
+  "sql_exec.debug": false,
+  "sql_exec.commands": {
+    "mysql": "mysql",
+    "pgsql": "psql",
+    "oracle": "sqlplus",
+    "vertica": "vsql"
+  },
+  "connections": {
+    "bitinka": {
+      "type": "mysql",
+      "host": "192.168.0.214",
+      "port": 3306,
+      "username": "root",
+      "password": "72518ab794f932acb7595fa082abfa4b",
+      "database": "bitinka"
+    },
+    "mysql": {
+      "type": "mysql",
+      "host": "127.0.0.1",
+      "port": 3306,
+      "username": "root",
+      "password": "123456",
+      "database": "bitinka"
+    },
+    "mysql david": {
+      "type": "mysql",
+      "host": "192.168.0.214",
+      "port": 3306,
+      "username": "root",
+      "password": "123456",
+      "database": "bitinka"
+    },
+    "mysql david creditcard": {
+      "type": "mysql",
+      "host": "192.168.0.214",
+      "port": 3306,
+      "username": "root",
+      "password": "123456",
+      "database": "creditcard"
+    },
+  }
+}

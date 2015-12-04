@@ -1,0 +1,15 @@
+[
+	{ "keys": ["ctrl+}"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["ctrl+shift+}"], "command": "toggle_comment", "args": { "block": true } },
+	{ "keys": ["ctrl+m"], "command": "mote" },
+	{ "keys": ["f12"], "command": "reindent" },
+	// para el sql
+	{ "keys": ["ctrl+alt+r"], "command": "sql_list_connection" },
+	{ "keys": ["ctrl+enter"], "command": "sql_execute" },
+	{ "keys": ["ctrl+r", "ctrl+h"], "command": "sql_history" },
+	{ "keys": ["ctrl+r", "ctrl+q"], "command": "sql_query" },
+	{ "keys": ["ctrl+r", "ctrl+s"], "command": "sql_show_records" },
+	{ "keys": ["ctrl+r", "ctrl+d"], "command": "sql_desc" },
+	/*para snippet comentario.sublime-snippet*/
+	{ "keys": ["ctrl+alt+c"], "command": "insert_snippet", "args": {"name": "Packages/User/comentario.sublime-snippet"} }
+]

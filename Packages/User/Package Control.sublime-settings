@@ -1,0 +1,28 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"1337 Color Scheme",
+		"AngularJS",
+		"AngularJS Snippets",
+		"BracketHighlighter",
+		"CodeIgniter Snippets",
+		"CodeIgniter Utilities",
+		"ColorPicker",
+		"Diffy",
+		"Emmet",
+		"Generate Password",
+		"Jade",
+		"ng-snippets",
+		"Package Control",
+		"Pretty JSON",
+		"SQLExec",
+		"SublimeCodeIntel",
+		"Super Calculator",
+		"Terminal",
+		"Theme - Flatland"
+	]
+}
