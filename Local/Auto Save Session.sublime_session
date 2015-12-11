@@ -1,8 +1,9 @@
 {
 	"folder_history":
 	[
-		"/home/jdelgado/codeproject/bitinka_jdelgado",
+		"/home/jdelgado/codeproject/bitinka_dmolina",
 		"/home/jdelgado/codeproject/bitinka_master",
+		"/home/jdelgado/codeproject/bitinka_jdelgado",
 		"/home/jdelgado/codeproject/bitinka_jdelgado/application",
 		"/home/jdelgado/codeproject/estadistica",
 		"/home/jdelgado/codeproject/bitinka (copia)",
@@ -1469,16 +1470,60 @@
 				"selected_items":
 				[
 					[
-						"db",
-						"db_update	CI - Active Record DB Update"
+						"print_r",
+						"print_r($result"
 					],
 					[
-						"fun",
-						"function〔keyword〕"
+						"fill",
+						"filledAmount"
+					],
+					[
+						"actua",
+						"actualizar_balance"
+					],
+					[
+						"actul",
+						"actualizar"
+					],
+					[
+						"sm_",
+						"sm_token"
+					],
+					[
+						"fun_a",
+						"func_get_args"
+					],
+					[
+						"print_",
+						"print_r"
+					],
+					[
+						"bitin",
+						"bitinka_model〔class〕"
+					],
+					[
+						"ina",
+						"inkapay〔class〕"
 					],
 					[
 						"lo",
-						"location〔variable〕"
+						"loadModel〔function〕"
+					],
+					[
+						"Tar",
+						"Tarjeta_model"
+					],
+					[
+						"rand",
+						"random_string〔function〕"
+					],
+					[
+						"fun",
+						"fun	function …"
+					],
+					[
+						"db",
+						"db_update	CI - Active Record DB Update"
 					],
 					[
 						"db_",
@@ -1909,38 +1954,60 @@
 			"buffers":
 			[
 				{
-					"contents": "SELECT * FROM userdetails WHERE username = \"agroindustrial\";\n\nSELECT * FROM coin_order WHERE userId = 688 order by trade_id desc;\n\nSELECT * FROM ordertemp WHERE buyerUserid = 688; \n\n\nSELECT * FROM transaction_history WHERE userId in (688) order by transactionId desc;\n\n1.22577 - 1.13675 = 0.09\n1.22577 - 2.7 = -1.47\n\n1.57999900 + 0.99325000 + 0.14350000 - 0.0079 - 0.0050 - 0.0007 = 2.70\n\n\n3517.3 - 3389.71 = 127.59\n3505 - 3389.71 = 115.29\n\n\n3517.3  - 3389.73 = 127.57000000\n\n1.14\n\n7022.30\n\n344.11",
+					"file": "/home/jdelgado/codeproject/bitinka_dmolina/application/models/bitinka_model.php",
 					"settings":
 					{
-						"buffer_size": 497,
+						"buffer_size": 282583,
+						"line_ending": "Windows"
+					}
+				},
+				{
+					"contents": "select u.username,b.BTC,b.USD,b.BSF from coin_userbalance b\njoin userdetails u on u.user_id = b.userId\nwhere userId in (778,38,550,526);\n\n+----------+-----+-----+-------+\n| username | BTC | USD | BSF   |\n+----------+-----+-----+-------+\n| msojo    |   0 |  90 | 60.08 |\n| dmolina  |   0 | 970 |     0 |\n| jdelgado |   0 |   0 | 29.61 |\n| mariita  |   2 |   0 |     0 |\n+----------+-----+-----+-------+\n\n+----------+-------+------+-------+\n| username | BTC   | USD  | BSF   |\n+----------+-------+------+-------+\n| msojo    | 0.995 |   90 | 60.08 |\n| dmolina  |     0 |  970 |     0 |\n| jdelgado |     0 |    0 | 29.61 |\n| mariita  |     1 | 9.95 |     0 |\n+----------+-------+------+-------+\n\n\n0.98000008 + 9.97\n\n0.99801400\n\n90.04000000\n\n29.5602\n\n34.92990000\n\n\n39.8496\n\n1.98903\n\n80.1\n\n  USD\nComisión\n12.437 USD\n\n690205\n\n620.76000000",
+					"settings":
+					{
+						"buffer_size": 831,
 						"line_ending": "Unix"
 					}
 				},
 				{
-					"contents": "<?php defined('BASEPATH') OR exit('No direct script access allowed');\n/**\n *cargar el modelo \n */\n// require_once(__DIR__.\"/../models/tarjeta_model.php\");\n\nclass TarjetaCredito extends MY_Controller {\n	protected function _init(){\n		$this->load->model('tarjeta_model');\n		$this->load->database();\n	}\n	public function index(){$client_userid = $this->session->userdata('client_userid'); \n   		if($client_userid==\"\"){\n   			redirect('/','refresh');\n   		}\n		$this->view(\"front_new/tarjetasCredido/index\");\n	}\n	\n	public function templates($tlp=''){\n		$client_userid = $this->session->userdata('client_userid'); \n   		if($client_userid==\"\"){\n   			$this->error(\"403 no permitido\");\n   		}\n		switch ($tlp) {\n			case 'listar':\n				$this->view(\"front_new/tarjetasCredido/listar\");\n				break;\n			case 'asociar':\n				$this->view(\"front_new/tarjetasCredido/asociar\");\n				break;\n			case 'confirmar':\n				$this->view(\"front_new/tarjetasCredido/confirmar\");\n				break;\n			case 'enderarrollo':\n				$this->view(\"front_new/tarjetasCredido/enderarrollo\");\n				break;\n			default: break;\n		}\n	}\n	public function listTarjetas(){\n   		$client_userid = $this->session->userdata('client_userid'); \n   		if($client_userid==\"\"){\n   			$this->error(\"403 no permitido\");\n   		}\n		// $this->load->model('tarjeta_model');\n   		\n		$m = new Tarjeta_model();\n		$res = $m->listTarjetas($client_userid);\n		$this->success($res);\n	}\n\n	/**\n	 * cantidad de tarjetas\n	 */\n	public function cantTarjetas(){\n   		$client_userid = $this->session->userdata('client_userid'); \n   		if($client_userid==\"\"){\n   			$this->error(\"403 no permitido\");\n   		}\n		$m = new Tarjeta_model();\n		$res = $m->listTarjetas($client_userid);\n		$this->success([\"cantidad\"=>count($res)]);\n	}\n\n	/**\n	 * Ruta para guardar la tarjeta de credito\n	 */\n	public function guardar(){\n		$request = $this->param();\n		$request[\"num_tarjeta\"] = str_replace(\" \",\"\",$request[\"num_tarjeta\"]);\n		$request[\"ano\"] = array_pop(str_split($request[\"ano\"], 2));\n		// if(intval($request[\"mes\"])==1){$request[\"mes\"] = '0'.$request[\"mes\"]; }\n		$fecha_vencimiento = $request[\"mes\"].$request[\"ano\"];\n		if($request[\"seletedDireccion\"]==\"self\"){\n			$dir = $request[\"actualDireccion\"];\n		}else{\n			$dir = $request[\"nuevaDireccion\"];\n		}\n		// $this->load->model('tarjeta_model');\n		$m = new Tarjeta_model();\n		$id_usuario = intval($this->session->userdata('client_userid')); \n		\n		/*verificar si existe la tarjeta en la plataforma*/\n		$res = $m->existe_cardcredito($request[\"num_tarjeta\"]);\n		if($res[\"existe\"]){\n			$this->error(\"Ya existe esa tarjeta\");\n		}\n\n		$data = [\n			\"nombre\"=>$request[\"nombre\"],\n			\"apellido\"=>$request[\"apellido\"],\n			\"tipo_de_tarjeta\"=>$request[\"tipo_tarjeta\"],\n			\"num_tarjeta\"=>$request[\"num_tarjeta\"],\n			\"fecha_vencimiento\"=>$fecha_vencimiento,\n			\"linea_direccion1\"=>$dir[\"linea_direccion1\"],\n			\"ciudad\"=>$dir[\"ciudad\"],\n			\"region\"=>$dir[\"region\"],\n			\"pais\"=>$dir[\"pais\"],\n			\"codigo_postal\"=>$dir[\"codigo_postal\"]\n		];\n		if(array_key_exists(\"linea_direccion2\", $dir)){\n			$data[\"linea_direccion2\"] = $dir[\"linea_direccion2\"];\n		}\n\n		$res = $m->addTarjeta($data,$id_usuario);\n		if ($res[\"code\"]==1) {\n			$res[\"fecha_vencimiento\"] = $fecha_vencimiento;\n			$this->success($res,\"Se agrego la tarjeta con exito <br> <b>Se le ha cobrado un monto aleatorio, por favor procesa a introducir dicho monto para confirmar su tarjeta<b>\");\n		}else{\n			switch ($res[\"msg\"]) {\n				case 'INVALID CARDNUMBER': $error = \"Numero de tarjeta invalida\"; break;\n				case 'INVALID EXPIRATION DATE': $error = \"Fecha de vencimiento invalidad\"; break;\n				default: $error = $res[\"msg\"];\n					break;\n			}\n			$this->error($error);\n		}\n	}\n	public function getDataAsociarPaises(){\n		$id_usuario = intval($this->session->userdata('client_userid')); \n		$m = new Tarjeta_model();\n		$this->success([\n			\"paises\"            => $m->getPais(),\n			\"direccion_actual\"  => $m->getDireccionActual($id_usuario),\n			\"cantidad_tarjetas\" => count($m->listTarjetas($id_usuario)),\n			\"me\"                => $m->getUserById($id_usuario),\n		]);\n	}\n	/**\n	 * Ruta para eliminar la tarjeta de credito\n	 */\n	public function eliminar_tarjeta(){\n   		$client_userid = $this->session->userdata('client_userid'); \n   		if($client_userid==\"\"){\n   			$this->error(\"403 no permitido\");\n   		}\n		// $this->load->model('tarjeta_model');\n   		$id_tarjeta = $this->param(\"id_tarjeta\");\n		$m = new Tarjeta_model();\n		$res = $m->eliminar_tarjeta($id_tarjeta,$client_userid);\n		if($res[\"code\"] == -1){\n			$this->error(\"No se pudo eliminar la tarjeta\");\n		}\n		$this->success($res,\"Se elimino correctamente\");\n	}	\n\n	/**\n	 * Ruta para eliminar la tarjeta de credito\n	 */\n	public function verificar_cardcredito(){\n		$m = new Tarjeta_model();\n\n		$this->success($m->existe_cardcredito());\n	}\n	/**\n     * para validar las tarjetas de creditos en el back-end\n	 */\n	public function backend_validar_tarjeta(){\n\n		$this->view(\"front_new/tarjetasCredido/backend_validar_tarjeta\",[]);\n	}\n\n	/**\n	 * para confirmar las tarjetas\n	 */\n	public function confirmar_tarjeta(){\n		$m = new Tarjeta_model();\n		$request = $this->param();\n		$res = $m->confirmar_tarjeta($request);\n		// salida($res);\n\n		if($res[\"code\"] == -1){\n			$this->error($res[\"msg\"],$res);\n		}\n		$this->success($res,\"Estaremos procesando su tarjeta, por favor tenga paciencia\");\n	}\n}\n",
-					"file": "/home/jdelgado/codeproject/bitinka_jdelgado/application/controllers/tarjetaCredito.php",
-					"file_size": 5298,
-					"file_write_time": 130935632077630886,
+					"contents": "1.49250000\n1.49250000\n620.88 - 3.1200 = 617.76000000\n\n2861.10 - 14.3550 = 2846.745 brl\n1.26600000\n\nroger el caso que te comento gustavo de eduardoMarino, se pudo haber causado con la falla del mapping, el vendio 1.4925 btc a 416 USD = 620.88 - 3.1200 fee = 617.76 USD, dime si le reintegro los 617.76USD al usuario?. \n\nCon respecto a teresa junior, paso que ella deposito 3 btc y de los cuales vendio 1.734 a 1650 Brl, lo que le corresponde 2846.745 brl y le quedarian otros 1.266 btc restantes en su balence, dime para actualizarcelos.\n\nLo del mapping, ya lo hicimos de nuevo y estamos probando todos los casos, incluyendo el send_money y lo de las parciales.\n\nEn las pruebas, estan dando buenos resultados, pero queremos hacerle un poco mas de pruebas.\n\ncopiame cuando le puda reintegrar los saldos a los balances de los dos usuarios.\n\n\n\n3.00000000\n\n\n9.9499*2 = 19.89980000\n\n0.993004*2 = 1.98600800\n\n9.87*2 = 19.74",
 					"settings":
 					{
-						"buffer_size": 5300,
-						"line_ending": "Unix"
+						"buffer_size": 916,
+						"line_ending": "Unix",
+						"name": "1.49250000"
 					}
 				},
 				{
-					"file": "/home/jdelgado/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+					"file": "/home/jdelgado/codeproject/bitinka_dmolina/js/scrollbar.js",
 					"settings":
 					{
-						"buffer_size": 804,
-						"line_ending": "Unix"
+						"buffer_size": 21397,
+						"line_ending": "Windows"
 					}
 				},
 				{
-					"file": "/home/jdelgado/.config/sublime-text-3/Packages/User/comentario.sublime-snippet",
+					"file": "/home/jdelgado/codeproject/bitinka_dmolina/application/views/front/order.php",
 					"settings":
 					{
-						"buffer_size": 378,
-						"line_ending": "Unix"
+						"buffer_size": 12512,
+						"line_ending": "Windows"
+					}
+				},
+				{
+					"file": "/home/jdelgado/codeproject/bitinka_dmolina/application/models/api/inkapay_model.php",
+					"settings":
+					{
+						"buffer_size": 51160,
+						"line_ending": "Windows"
+					}
+				},
+				{
+					"file": "/home/jdelgado/codeproject/bitinka_dmolina/application/controllers/bitinka.php",
+					"settings":
+					{
+						"buffer_size": 190747,
+						"line_ending": "Windows"
 					}
 				}
 			],
@@ -1952,12 +2019,20 @@
 			"command_palette":
 			{
 				"height": 370.0,
-				"last_filter": "",
+				"last_filter": "sq",
 				"selected_items":
 				[
 					[
 						"sq",
 						"Set Syntax: SQL"
+					],
+					[
+						"php",
+						"Set Syntax: PHP"
+					],
+					[
+						"html",
+						"Set Syntax: HTML"
 					],
 					[
 						"inst",
@@ -1996,10 +2071,6 @@
 						"Package Control: Install Package"
 					],
 					[
-						"php",
-						"Set Syntax: PHP"
-					],
-					[
 						"y",
 						"Set Syntax: YAML"
 					],
@@ -2020,7 +2091,7 @@
 						"Color Picker"
 					]
 				],
-				"width": 561.0
+				"width": 498.0
 			},
 			"console":
 			{
@@ -2041,33 +2112,54 @@
 			},
 			"expanded_folders":
 			[
-				"/home/jdelgado/codeproject/bitinka_jdelgado",
-				"/home/jdelgado/codeproject/bitinka_jdelgado/application",
-				"/home/jdelgado/codeproject/bitinka_jdelgado/application/controllers"
+				"/home/jdelgado/codeproject/bitinka_dmolina",
+				"/home/jdelgado/codeproject/bitinka_dmolina/application",
+				"/home/jdelgado/codeproject/bitinka_dmolina/application/models",
+				"/home/jdelgado/codeproject/bitinka_dmolina/application/models/api",
+				"/home/jdelgado/codeproject/bitinka_dmolina/public"
 			],
 			"file_history":
 			[
-				"/home/jdelgado/.config/sublime-text-3/Packages/Emmet/Default (Linux).sublime-keymap",
+				"/home/jdelgado/codeproject/bitinka_dmolina/application/config/database.php",
 				"/home/jdelgado/.config/sublime-text-3/Packages/User/SQLExec.sublime-settings",
+				"/home/jdelgado/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+				"/home/jdelgado/codeproject/bitinka_dmolina/system/database/DB_driver.php",
+				"/home/jdelgado/codeproject/bitinka_dmolina/application/models/bitinka_model - david.php",
+				"/home/jdelgado/codeproject/bitinka_dmolina/application/controllers/api/apinka.php",
+				"/home/jdelgado/codeproject/bitinka_dmolina/application/helpers/functions_helper.php",
+				"/home/jdelgado/codeproject/bitinka_dmolina/application/views/front/send_money.php",
+				"/home/jdelgado/codeproject/bitinka_dmolina/application/index.html",
+				"/home/jdelgado/codeproject/bitinka/uploader/php/index.php",
+				"/home/jdelgado/codeproject/bitinka/uploader/index.php",
+				"/home/jdelgado/codeproject/bitinka_master/application/models/bitinka_model.php",
+				"/home/jdelgado/codeproject/bitinka_master/application/config/database.php",
+				"/home/jdelgado/codeproject/bitinka_master/system/database/DB_active_rec.php",
+				"/home/jdelgado/codeproject/bitinka_master/application/controllers/welcome.php",
+				"/home/jdelgado/codeproject/bitinka_master/application/controllers/bitinka.php",
+				"/home/jdelgado/Descargas/skipe/MAY/bitinka.php",
+				"/home/jdelgado/Descargas/skipe/MAY/bitinka_model.php",
+				"/home/jdelgado/codeproject/bitinka_jdelgado/application/config/database.php",
+				"/home/jdelgado/codeproject/bitinka_jdelgado/application/models/api/inkapay_model.php",
+				"/home/jdelgado/codeproject/bitinka_jdelgado/application/models/tarjeta_model.php",
+				"/home/jdelgado/codeproject/bitinka_jdelgado/application/controllers/tarjetaCredito.php",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/application/controllers/bitinka.php",
+				"/home/jdelgado/codeproject/bitinka_jdelgado/application/models/inkapay_model.php",
+				"/home/jdelgado/codeproject/bitinka_jdelgado/application/core/MY_Controller.php",
+				"/home/jdelgado/codeproject/bitinka_jdelgado/application/core/MY_Model.php",
+				"/home/jdelgado/.config/sublime-text-3/Packages/User/comentario.sublime-snippet",
+				"/home/jdelgado/.config/sublime-text-3/Packages/Emmet/Default (Linux).sublime-keymap",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/application/models/bitinka_model.php",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/system/database/DB_active_rec.php",
 				"/home/jdelgado/.config/sublime-text-3/Packages/User/Super Calculator.sublime-settings",
 				"/home/jdelgado/.config/sublime-text-3/Packages/Super Calculator/Super Calculator.sublime-settings",
 				"/home/jdelgado/.config/sublime-text-3/Packages/SQLExec/SQLExec.sublime-settings",
-				"/home/jdelgado/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
 				"/home/jdelgado/.config/sublime-text-3/Packages/Super Calculator/Default (Linux).sublime-keymap",
 				"/home/jdelgado/Documentos/jebb1987@gmail.com.txt",
 				"/home/jdelgado/Documentos/gus",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/bitinka.sublime-project",
-				"/home/jdelgado/codeproject/bitinka_jdelgado/application/controllers/tarjetaCredito.php",
-				"/home/jdelgado/codeproject/bitinka_jdelgado/application/core/MY_Controller.php",
-				"/home/jdelgado/codeproject/bitinka_jdelgado/application/models/tarjeta_model.php",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/public/js/tarjetaCredito.js",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/application/views/front_new/tarjetasCredido/asociar.php",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/application/views/front_new/tarjetasCredido/listar.php",
-				"/home/jdelgado/codeproject/bitinka_jdelgado/application/config/database.php",
-				"/home/jdelgado/codeproject/bitinka_master/application/controllers/bitinka.php",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/application/views/front/order.php",
 				"/home/jdelgado/codeproject/bitinka_master/application/views/front/index.php",
 				"/home/jdelgado/codeproject/bitinka_master/js/scrollbar.js",
@@ -2079,16 +2171,13 @@
 				"/home/jdelgado/codeproject/bitinka_jdelgado/land_js/jquery.js",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/application/helpers/functions_helper.php",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/system/database/DB_driver.php",
-				"/home/jdelgado/codeproject/bitinka_master/application/config/database.php",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/application/views/front/index_08052015.php",
 				"/home/jdelgado/.config/sublime-text-3/Packages/SQLExec/Default (Linux).sublime-keymap",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/system/core/Loader.php",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/js/datatable.js",
-				"/home/jdelgado/codeproject/bitinka_jdelgado/application/core/MY_Model.php",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/system/core/Model.php",
 				"/home/jdelgado/codeproject/bitinka_jdelgado/system/core/CodeIgniter.php",
 				"/home/jdelgado/codeproject/bitinka_master/index.php",
-				"/home/jdelgado/codeproject/bitinka_master/application/models/bitinka_model.php",
 				"/home/jdelgado/codeproject/bitinka_master/application/views/front/with_sendmoneycc.php",
 				"/home/jdelgado/codeproject/bitinka_master/application/views/front_new/tarjetasCredido/listar.php",
 				"/home/jdelgado/codeproject/bitinka_master/application/helpers/functions_helper.php",
@@ -2158,23 +2247,7 @@
 				"/srv/git/BrainITreeInka/templates/home.php",
 				"/srv/git/BrainITreeInka/composer.json",
 				"/srv/bitinka/application/controllers/bitinka.php",
-				"/home/jdelgado/Escritorio/bitinka_model.php",
-				"/home/jdelgado/Escritorio/bitinka.php",
-				"/srv/git/BrainITreeInka/templates",
-				"/srv/git/Sage-Soap-Api/example.php",
-				"/srv/git/Sage-Soap-Api/index.php",
-				"/srv/bitinka/application/models/bitinka_model.php",
-				"/srv/bitinka/application/controllers/admin.php",
-				"/srv/bitinka/application/views/admin/admin_sidebar.php",
-				"/srv/git/Sage-Soap-Api/sage/api.php",
-				"/home/jdelgado/codeproject/phpdotenv/index.php",
-				"/srv/bitinka/application/models/admin_model.php",
-				"/srv/bitinka/application/views/admin/log_accesos_usuarios.php",
-				"/home/jdelgado/Descargas/Sistema Final/herreria.sql",
-				"/srv/bitinka/public/js/tarjetaCredito.js",
-				"/srv/bitinka/application/controllers/tarjetaCredito.php",
-				"/srv/git/admin_sidebar.php",
-				"/srv/bitinka/application/views/admin/comision_divisa.php"
+				"/home/jdelgado/Escritorio/bitinka_model.php"
 			],
 			"find":
 			{
@@ -2202,6 +2275,52 @@
 				"case_sensitive": false,
 				"find_history":
 				[
+					"ordenes_creadas_send_money",
+					"_comision",
+					"orden",
+					"disponibilidad",
+					"actualizar_balance",
+					"\"mysql\": {\n      \"type\": \"mysql\",\n      \"host\": \"127.0.0.1\",\n      \"port\": 3306,\n      \"username\": \"root\",\n      \"password\": \"123456\",\n      \"database\": \"bitinka\"\n    },",
+					"9.87*2 = ",
+					"createSellorder_forsm",
+					"trans",
+					"mapping_response",
+					" createSellordermodel",
+					"mapping",
+					" create",
+					" home",
+					"print_r",
+					"actia",
+					" mappin",
+					"}\n",
+					"actualizar_balance",
+					"com",
+					"co",
+					"com",
+					"comi",
+					"getRecuserId",
+					"balance_final",
+					"monto_comprado",
+					"compra",
+					"orden",
+					"compra",
+					"getRecuserId",
+					"mapping",
+					" mapp",
+					"else",
+					"} else",
+					" else",
+					"chequear_token",
+					" mapp",
+					" createSellorder",
+					"createSellorder",
+					"mapping",
+					"comision",
+					"disponibilidad",
+					" mapp",
+					"178396.24",
+					"OrdenesVenta",
+					"random_string",
 					"encrypt",
 					"3517.3",
 					"where",
@@ -2283,53 +2402,7 @@
 					"username",
 					"trade",
 					"    `log_accesos`.`accion",
-					"`log_accesos`.`",
-					"logo",
-					"login_s",
-					"log_accesos",
-					"bitinka`.`",
-					"`",
-					"trade",
-					"VERIFY_SERVICE",
-					"VAULT_URL",
-					"function check_logindetails",
-					"login_date",
-					"db_email",
-					"check_tfa_siteconfig",
-					"rubros",
-					"cantidad",
-					"rubros",
-					"cantidad",
-					"rubros",
-					"https://www.sagepayments.net/web_services/wsVault/wsVault",
-					"https://www.sageexchange.com/VirtualPaymentTerminal/frmPayment.aspx",
-					"https://www.sageexchange.com/VirtualPaymentTerminal/frmPayment.aspx.",
-					"frmenvelope",
-					"frmopenenvelope",
-					"https://www.sageexchange.com/VirtualPaymentTerminal/frmopenenvelope.aspx",
-					"    \n",
-					"https://www.sageexchange.com/virtualpaymentterminal/frmpayment.aspx",
-					"https://www.sageexchange.com/VirtualPaymentTerminal/frmPayment.aspx",
-					"ResponseMessage",
-					"modificado:",
-					"withdraw",
-					"function withdraw(",
-					"function withdraw",
-					"fundwithdraw",
-					"new_withdraw(0);",
-					"Importante",
-					");\n",
-					">>",
-					"<<",
-					"porcentaje_send_money",
-					" porcen",
-					"porcen",
-					"procen",
-					"procenta",
-					"prosenta",
-					"procenta",
-					"withdrawcoinrequest",
-					"isset() "
+					"`log_accesos`.`"
 				],
 				"highlight": true,
 				"in_selection": false,
@@ -2348,7 +2421,7 @@
 			"folders":
 			[
 				{
-					"path": "/home/jdelgado/codeproject/bitinka_jdelgado"
+					"path": "/home/jdelgado/codeproject/bitinka_dmolina"
 				}
 			],
 			"groups":
@@ -2359,106 +2432,44 @@
 					[
 						{
 							"buffer": 0,
+							"file": "/home/jdelgado/codeproject/bitinka_dmolina/application/models/bitinka_model.php",
 							"semi_transient": false,
 							"settings":
 							{
-								"buffer_size": 497,
+								"buffer_size": 282583,
 								"regions":
 								{
+									"bookmarks":
+									{
+										"flags": 144,
+										"icon": "bookmark",
+										"regions":
+										[
+											[
+												97735,
+												97735
+											],
+											[
+												100183,
+												100183
+											],
+											[
+												107917,
+												107917
+											],
+											[
+												126285,
+												126285
+											]
+										],
+										"scope": "bookmarks"
+									}
 								},
 								"selection":
 								[
 									[
-										388,
-										388
-									]
-								],
-								"settings":
-								{
-									"BracketHighlighterBusy": false,
-									"auto_name": "",
-									"bh_regions":
-									[
-										"bh_square",
-										"bh_square_center",
-										"bh_square_open",
-										"bh_square_close",
-										"bh_square_content",
-										"bh_tag",
-										"bh_tag_center",
-										"bh_tag_open",
-										"bh_tag_close",
-										"bh_tag_content",
-										"bh_single_quote",
-										"bh_single_quote_center",
-										"bh_single_quote_open",
-										"bh_single_quote_close",
-										"bh_single_quote_content",
-										"bh_angle",
-										"bh_angle_center",
-										"bh_angle_open",
-										"bh_angle_close",
-										"bh_angle_content",
-										"bh_curly",
-										"bh_curly_center",
-										"bh_curly_open",
-										"bh_curly_close",
-										"bh_curly_content",
-										"bh_regex",
-										"bh_regex_center",
-										"bh_regex_open",
-										"bh_regex_close",
-										"bh_regex_content",
-										"bh_c_define",
-										"bh_c_define_center",
-										"bh_c_define_open",
-										"bh_c_define_close",
-										"bh_c_define_content",
-										"bh_default",
-										"bh_default_center",
-										"bh_default_open",
-										"bh_default_close",
-										"bh_default_content",
-										"bh_unmatched",
-										"bh_unmatched_center",
-										"bh_unmatched_open",
-										"bh_unmatched_close",
-										"bh_unmatched_content",
-										"bh_round",
-										"bh_round_center",
-										"bh_round_open",
-										"bh_round_close",
-										"bh_round_content",
-										"bh_double_quote",
-										"bh_double_quote_center",
-										"bh_double_quote_open",
-										"bh_double_quote_close",
-										"bh_double_quote_content"
-									],
-									"syntax": "Packages/SQL/SQL.tmLanguage"
-								},
-								"translation.x": 0.0,
-								"translation.y": 0.0,
-								"zoom_level": 1.0
-							},
-							"stack_index": 3,
-							"type": "text"
-						},
-						{
-							"buffer": 1,
-							"file": "/home/jdelgado/codeproject/bitinka_jdelgado/application/controllers/tarjetaCredito.php",
-							"semi_transient": false,
-							"settings":
-							{
-								"buffer_size": 5300,
-								"regions":
-								{
-								},
-								"selection":
-								[
-									[
-										506,
-										506
+										117886,
+										117886
 									]
 								],
 								"settings":
@@ -2472,21 +2483,41 @@
 										"bh_square_open",
 										"bh_square_close",
 										"bh_square_content",
-										"bh_tag",
-										"bh_tag_center",
-										"bh_tag_open",
-										"bh_tag_close",
-										"bh_tag_content",
-										"bh_single_quote",
-										"bh_single_quote_center",
-										"bh_single_quote_open",
-										"bh_single_quote_close",
-										"bh_single_quote_content",
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content",
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content",
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content",
 										"bh_angle",
 										"bh_angle_center",
 										"bh_angle_open",
 										"bh_angle_close",
 										"bh_angle_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
 										"bh_curly",
 										"bh_curly_center",
 										"bh_curly_open",
@@ -2497,37 +2528,103 @@
 										"bh_regex_open",
 										"bh_regex_close",
 										"bh_regex_content",
-										"bh_c_define",
-										"bh_c_define_center",
-										"bh_c_define_open",
-										"bh_c_define_close",
-										"bh_c_define_content",
-										"bh_default",
-										"bh_default_center",
-										"bh_default_open",
-										"bh_default_close",
-										"bh_default_content",
-										"bh_unmatched",
-										"bh_unmatched_center",
-										"bh_unmatched_open",
-										"bh_unmatched_close",
-										"bh_unmatched_content",
-										"bh_round",
-										"bh_round_center",
-										"bh_round_open",
-										"bh_round_close",
-										"bh_round_content",
-										"bh_double_quote",
-										"bh_double_quote_center",
-										"bh_double_quote_open",
-										"bh_double_quote_close",
-										"bh_double_quote_content"
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content"
 									],
 									"syntax": "Packages/PHP/PHP.tmLanguage",
 									"translate_tabs_to_spaces": false
 								},
 								"translation.x": 0.0,
-								"translation.y": 102.0,
+								"translation.y": 74097.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 2,
+							"type": "text"
+						},
+						{
+							"buffer": 1,
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 831,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										825,
+										825
+									]
+								],
+								"settings":
+								{
+									"BracketHighlighterBusy": false,
+									"bh_regions":
+									[
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content",
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content",
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content"
+									],
+									"syntax": "Packages/SQL/SQL.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 245.0,
 								"zoom_level": 1.0
 							},
 							"stack_index": 0,
@@ -2535,85 +2632,83 @@
 						},
 						{
 							"buffer": 2,
-							"file": "/home/jdelgado/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
 							"semi_transient": false,
 							"settings":
 							{
-								"buffer_size": 804,
+								"buffer_size": 916,
 								"regions":
 								{
 								},
 								"selection":
 								[
 									[
-										804,
-										804
+										916,
+										916
 									]
 								],
 								"settings":
 								{
 									"BracketHighlighterBusy": false,
-									"auto_complete": true,
+									"auto_name": "1.49250000",
 									"bh_regions":
 									[
-										"bh_square",
-										"bh_square_center",
-										"bh_square_open",
-										"bh_square_close",
-										"bh_square_content",
-										"bh_tag",
-										"bh_tag_center",
-										"bh_tag_open",
-										"bh_tag_close",
-										"bh_tag_content",
-										"bh_single_quote",
-										"bh_single_quote_center",
-										"bh_single_quote_open",
-										"bh_single_quote_close",
-										"bh_single_quote_content",
-										"bh_angle",
-										"bh_angle_center",
-										"bh_angle_open",
-										"bh_angle_close",
-										"bh_angle_content",
-										"bh_curly",
-										"bh_curly_center",
-										"bh_curly_open",
-										"bh_curly_close",
-										"bh_curly_content",
-										"bh_regex",
-										"bh_regex_center",
-										"bh_regex_open",
-										"bh_regex_close",
-										"bh_regex_content",
-										"bh_c_define",
-										"bh_c_define_center",
-										"bh_c_define_open",
-										"bh_c_define_close",
-										"bh_c_define_content",
 										"bh_default",
 										"bh_default_center",
 										"bh_default_open",
 										"bh_default_close",
 										"bh_default_content",
-										"bh_unmatched",
-										"bh_unmatched_center",
-										"bh_unmatched_open",
-										"bh_unmatched_close",
-										"bh_unmatched_content",
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
 										"bh_round",
 										"bh_round_center",
 										"bh_round_open",
 										"bh_round_close",
 										"bh_round_content",
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
 										"bh_double_quote",
 										"bh_double_quote_center",
 										"bh_double_quote_open",
 										"bh_double_quote_close",
-										"bh_double_quote_content"
+										"bh_double_quote_content",
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content"
 									],
-									"syntax": "Packages/JavaScript/JSON.tmLanguage",
-									"translate_tabs_to_spaces": false
+									"syntax": "Packages/Text/Plain text.tmLanguage"
 								},
 								"translation.x": 0.0,
 								"translation.y": 0.0,
@@ -2624,51 +2719,80 @@
 						},
 						{
 							"buffer": 3,
-							"file": "/home/jdelgado/.config/sublime-text-3/Packages/User/comentario.sublime-snippet",
+							"file": "/home/jdelgado/codeproject/bitinka_dmolina/js/scrollbar.js",
 							"semi_transient": false,
 							"settings":
 							{
-								"buffer_size": 378,
+								"buffer_size": 21397,
 								"regions":
 								{
+									"bookmarks":
+									{
+										"flags": 144,
+										"icon": "bookmark",
+										"regions":
+										[
+											[
+												13034,
+												13050
+											]
+										],
+										"scope": "bookmarks"
+									}
 								},
 								"selection":
 								[
 									[
-										232,
-										232
+										9716,
+										9716
 									]
 								],
 								"settings":
 								{
 									"BracketHighlighterBusy": false,
+									"auto_complete": false,
 									"bh_regions":
 									[
-										"bh_square",
-										"bh_square_center",
-										"bh_square_open",
-										"bh_square_close",
-										"bh_square_content",
-										"bh_tag",
-										"bh_tag_center",
-										"bh_tag_open",
-										"bh_tag_close",
-										"bh_tag_content",
-										"bh_single_quote",
-										"bh_single_quote_center",
-										"bh_single_quote_open",
-										"bh_single_quote_close",
-										"bh_single_quote_content",
-										"bh_angle",
-										"bh_angle_center",
-										"bh_angle_open",
-										"bh_angle_close",
-										"bh_angle_content",
 										"bh_curly",
 										"bh_curly_center",
 										"bh_curly_open",
 										"bh_curly_close",
 										"bh_curly_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content",
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
 										"bh_regex",
 										"bh_regex_center",
 										"bh_regex_open",
@@ -2679,35 +2803,307 @@
 										"bh_c_define_open",
 										"bh_c_define_close",
 										"bh_c_define_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content"
+									],
+									"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+									"translate_tabs_to_spaces": false
+								},
+								"translation.x": 0.0,
+								"translation.y": 4414.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 5,
+							"type": "text"
+						},
+						{
+							"buffer": 4,
+							"file": "/home/jdelgado/codeproject/bitinka_dmolina/application/views/front/order.php",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 12512,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										1200,
+										1200
+									]
+								],
+								"settings":
+								{
+									"BracketHighlighterBusy": false,
+									"auto_complete": false,
+									"bh_regions":
+									[
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content",
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
 										"bh_default",
 										"bh_default_center",
 										"bh_default_open",
 										"bh_default_close",
 										"bh_default_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
 										"bh_unmatched",
 										"bh_unmatched_center",
 										"bh_unmatched_open",
 										"bh_unmatched_close",
 										"bh_unmatched_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
 										"bh_round",
 										"bh_round_center",
 										"bh_round_open",
 										"bh_round_close",
-										"bh_round_content",
-										"bh_double_quote",
-										"bh_double_quote_center",
-										"bh_double_quote_open",
-										"bh_double_quote_close",
-										"bh_double_quote_content"
+										"bh_round_content"
 									],
-									"default_extension": "sublime-snippet",
-									"syntax": "Packages/XML/XML.tmLanguage"
+									"syntax": "Packages/PHP/PHP.tmLanguage",
+									"translate_tabs_to_spaces": false
 								},
 								"translation.x": 0.0,
 								"translation.y": 0.0,
 								"zoom_level": 1.0
 							},
-							"stack_index": 2,
+							"stack_index": 6,
+							"type": "text"
+						},
+						{
+							"buffer": 5,
+							"file": "/home/jdelgado/codeproject/bitinka_dmolina/application/models/api/inkapay_model.php",
+							"semi_transient": true,
+							"settings":
+							{
+								"buffer_size": 51160,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										4009,
+										4009
+									]
+								],
+								"settings":
+								{
+									"BracketHighlighterBusy": false,
+									"bh_regions":
+									[
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content",
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content",
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content"
+									],
+									"syntax": "Packages/PHP/PHP.tmLanguage",
+									"translate_tabs_to_spaces": false
+								},
+								"translation.x": 0.0,
+								"translation.y": 1983.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 4,
+							"type": "text"
+						},
+						{
+							"buffer": 6,
+							"file": "/home/jdelgado/codeproject/bitinka_dmolina/application/controllers/bitinka.php",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 190747,
+								"regions":
+								{
+									"bookmarks":
+									{
+										"flags": 144,
+										"icon": "bookmark",
+										"regions":
+										[
+											[
+												126117,
+												126117
+											],
+											[
+												127275,
+												127275
+											],
+											[
+												152797,
+												152797
+											]
+										],
+										"scope": "bookmarks"
+									}
+								},
+								"selection":
+								[
+									[
+										154679,
+										154679
+									]
+								],
+								"settings":
+								{
+									"BracketHighlighterBusy": false,
+									"auto_complete": false,
+									"bh_regions":
+									[
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content",
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content"
+									],
+									"syntax": "Packages/PHP/PHP.tmLanguage",
+									"translate_tabs_to_spaces": false
+								},
+								"translation.x": 0.0,
+								"translation.y": 81509.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 3,
 							"type": "text"
 						}
 					]
@@ -2762,14 +3158,14 @@
 			},
 			"output.unsaved_changes":
 			{
-				"height": 110.0
+				"height": 455.0
 			},
 			"pinned_build_system": "",
 			"position": "0,1,0,0,0,0,0,0,0,1366,768",
 			"project": "",
 			"replace":
 			{
-				"height": 46.0
+				"height": 64.0
 			},
 			"save_all_on_build": true,
 			"select_file":
@@ -2778,6 +3174,74 @@
 				"last_filter": "",
 				"selected_items":
 				[
+					[
+						"scr",
+						"js/scrollbar.js"
+					],
+					[
+						"front/orde",
+						"application/views/front/order.php"
+					],
+					[
+						"bitink",
+						"application/controllers/bitinka.php"
+					],
+					[
+						"bitinka_mo",
+						"application/models/bitinka_model - david.php"
+					],
+					[
+						"apin",
+						"application/controllers/api/apinka.php"
+					],
+					[
+						"send_mone",
+						"application/views/front/send_money.php"
+					],
+					[
+						"func",
+						"application/helpers/functions_helper.php"
+					],
+					[
+						"data",
+						"application/config/database.php"
+					],
+					[
+						"bitin",
+						"application/controllers/bitinka.php"
+					],
+					[
+						"send",
+						"application/views/front/send_money.php"
+					],
+					[
+						"fun",
+						"application/helpers/functions_helper.php"
+					],
+					[
+						"welco",
+						"application/controllers/welcome.php"
+					],
+					[
+						"database/db_a",
+						"system/database/DB_active_rec.php"
+					],
+					[
+						"bitinka_mode",
+						"application/models/bitinka_model.php"
+					],
+					[
+						"bitinka_",
+						"application/models/bitinka_model.php"
+					],
+					[
+						"biti",
+						"application/controllers/bitinka.php"
+					],
+					[
+						"bitinka",
+						"application/controllers/bitinka.php"
+					],
 					[
 						"tarjetade",
 						"application/controllers/tarjetaCredito.php"
@@ -2803,16 +3267,8 @@
 						"bitinka_jdelgado/application/views/front_new/tarjetasCredido/asociar.php"
 					],
 					[
-						"data",
-						"bitinka_master/application/config/database.php"
-					],
-					[
 						"scroll",
 						"bitinka_master/js/scrollbar.js"
-					],
-					[
-						"bitinka",
-						"bitinka_master/application/controllers/bitinka.php"
 					],
 					[
 						"front/order",
@@ -2823,20 +3279,12 @@
 						"bitinka_master/application/views/front/index.php"
 					],
 					[
-						"func",
-						"application/helpers/functions_helper.php"
-					],
-					[
 						"front/home",
 						"bitinka_master/application/views/front/with_sendmoneycc.php"
 					],
 					[
 						"index",
 						"bitinka_master/index.php"
-					],
-					[
-						"bitin",
-						"bitinka_master/application/models/bitinka_model.php"
 					],
 					[
 						"listar",
@@ -2853,10 +3301,6 @@
 					[
 						"tarje",
 						"bitinka_master/public/js/tarjetaCredito.js"
-					],
-					[
-						"fun",
-						"bitinka_master/application/views/front/funds.php"
 					],
 					[
 						"function",
@@ -2987,10 +3431,6 @@
 						"bitinka/system/database/DB.php"
 					],
 					[
-						"biti",
-						"bitinka/application/models/bitinka_model.php"
-					],
-					[
 						"admin/trade_history",
 						"bitinka/application/views/admin/trade_history.php"
 					],
@@ -3033,10 +3473,6 @@
 					[
 						"index.php",
 						"bitinka/index.php"
-					],
-					[
-						"bitink",
-						"bitinka/application/controllers/bitinka.php"
 					],
 					[
 						"inka",
@@ -3107,10 +3543,6 @@
 						"estadistica/application/views/planificacion/index.php"
 					],
 					[
-						"apin",
-						"bitinka/application/controllers/api/apinka.php"
-					],
-					[
 						"bitinka_model",
 						"bitinka/application/models/bitinka_model.php"
 					],
@@ -3121,10 +3553,6 @@
 					[
 						"datatable/",
 						"bitinka/plugins/tables/dataTables/jquery.dataTables.js"
-					],
-					[
-						"send",
-						"bitinka/application/views/front/send_money.php"
 					],
 					[
 						"js/scripts.js",
@@ -3257,38 +3685,6 @@
 					[
 						"bitinka/jsonrpcclient.php",
 						"bitinka/jsonRPCClient.php"
-					],
-					[
-						"json",
-						"bitinka/jsonRPCClient.php"
-					],
-					[
-						"dashboard/",
-						"application/views/dashboard/index.php"
-					],
-					[
-						"planificacion/",
-						"application/views/planificacion/index.php"
-					],
-					[
-						"auth/in",
-						"application/views/auth/index.php"
-					],
-					[
-						"common/admin_header",
-						"application/views/common/admin_header.php"
-					],
-					[
-						"das",
-						"application/controllers/Dashboard.php"
-					],
-					[
-						"base",
-						"Estadistica/application/core/Base_Controller.php"
-					],
-					[
-						"usu",
-						"Estadistica/application/views/mantenimiento/usuarios.php"
 					]
 				],
 				"width": 0.0
@@ -3322,7 +3718,7 @@
 			"show_minimap": false,
 			"show_open_files": true,
 			"show_tabs": true,
-			"side_bar_visible": true,
+			"side_bar_visible": false,
 			"side_bar_width": 246.0,
 			"status_bar_visible": true,
 			"template_settings":

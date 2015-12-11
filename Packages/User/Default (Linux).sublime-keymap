@@ -11,5 +11,5 @@
 	{ "keys": ["ctrl+r", "ctrl+s"], "command": "sql_show_records" },
 	{ "keys": ["ctrl+r", "ctrl+d"], "command": "sql_desc" },
 	/*para snippet comentario.sublime-snippet*/
-	{ "keys": ["ctrl+alt+c"], "command": "insert_snippet", "args": {"name": "Packages/User/comentario.sublime-snippet"} }
+	{ "keys": ["ctrl+shift+c"], "command": "insert_snippet", "args": {"name": "Packages/User/comentario.sublime-snippet"} }
 ]

@@ -2,7 +2,7 @@
 	<content><![CDATA[
 /**
  * 	des: ${1:Descripción}
- *	@author Jose Angel 
+ *	@author Jose Angel Delgado
  *	@param ${2:param1}
  *	@return ${3:mixed}
  */
