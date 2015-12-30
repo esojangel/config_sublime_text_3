@@ -10,7 +10,7 @@
     "bitinka": {
       "type": "mysql",
       "host": "192.168.0.214",
-      "port": 3306,
+      "port": 1987,
       "username": "root",
       "password": "72518ab794f932acb7595fa082abfa4b",
       "database": "bitinka"
